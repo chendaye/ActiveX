@@ -1,0 +1,6 @@
+E:\VC\ActiveX\ActiveX\bin\Release\ActiveX.dll
+E:\VC\ActiveX\ActiveX\bin\Release\ActiveX.pdb
+E:\VC\ActiveX\ActiveX\bin\Release\ActiveX.tlb
+E:\VC\ActiveX\ActiveX\obj\Release\ActiveX.csproj.CoreCompileInputs.cache
+E:\VC\ActiveX\ActiveX\obj\Release\ActiveX.dll
+E:\VC\ActiveX\ActiveX\obj\Release\ActiveX.pdb

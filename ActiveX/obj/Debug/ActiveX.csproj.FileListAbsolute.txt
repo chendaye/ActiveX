@@ -1,0 +1,5 @@
+E:\VC\ActiveX\ActiveX\bin\Debug\ActiveX.dll
+E:\VC\ActiveX\ActiveX\bin\Debug\ActiveX.pdb
+E:\VC\ActiveX\ActiveX\obj\Debug\ActiveX.csproj.CoreCompileInputs.cache
+E:\VC\ActiveX\ActiveX\obj\Debug\ActiveX.dll
+E:\VC\ActiveX\ActiveX\obj\Debug\ActiveX.pdb
