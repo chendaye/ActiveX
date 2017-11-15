@@ -1,0 +1,14 @@
+<?XML version="1.0" ENCODING='UTF-8'?>
+<!DOCTYPE SOFTPKG SYSTEM "http://www.microsoft.com/standards/osd/osd.dtd">
+<?XML::namespace href="http://www.microsoft.com/standards/osd/msicd.dtd" as="MSICD"?>
+<SOFTPKG NAME="ActiveXCab" VERSION="1,0,0,0">
+		<TITLE> ActiveXCab </TITLE>
+			<MSICD::NATIVECODE>
+				<CODE NAME="setup">
+					<IMPLEMENTATION>
+						<CODEBASE FILENAME="setup.exe">
+						</CODEBASE>
+					</IMPLEMENTATION>
+				</CODE>
+			</MSICD::NATIVECODE>
+</SOFTPKG>

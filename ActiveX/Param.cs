@@ -12,5 +12,6 @@ namespace MyActiveX
     {
         string Param { get; set; }
         string Zmber { get; set; }
+        string Txt { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace MyActiveX
     {
         private string EPL;
         private string printName;
+        private string txtPath;
         private string name = @"\\10.172.0.237\Zebra-FDX ZM400 200 dpi (EPL)";
 
         public MyActiveX()
@@ -33,9 +34,17 @@ namespace MyActiveX
             set { this.printName = value; }
         }
 
-      
 
-       /*EPL打印*/
+        //打印机名
+        public string Txt
+        {
+            get { return this.txtPath; }
+            set { this.txtPath = value; }
+        }
+
+
+
+        /*EPL打印*/
         public string Epl()
         {
             string cmd;
@@ -56,6 +65,13 @@ namespace MyActiveX
         {
             string zmber = this.Zmber;
             return zmber;
+        }
+
+        //打印机名字
+        public string txtName()
+        {
+            string txt = this.Txt;
+            return txt;
         }
 
         //文件路径
@@ -110,7 +126,7 @@ namespace MyActiveX
         {
             try
             {
-                string ImagesPath = @"E:\epl.txt";
+                string ImagesPath = this.Txt;
                 HttpWebRequest oHttp_Web_Req = (HttpWebRequest)WebRequest.Create(this.Param);
                 Stream oStream = oHttp_Web_Req.GetResponse().GetResponseStream();
                 using (StreamReader respStreamReader = new StreamReader(oStream, Encoding.UTF8))
