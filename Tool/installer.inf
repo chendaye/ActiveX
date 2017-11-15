@@ -1,0 +1,9 @@
+[Setup Hooks]
+hook1=hook1
+
+[hook1]
+run=msiexec /i %EXTRACT_DIR%\CSharpActiveX.msi /qn
+
+[Version]
+Signature= "$CHICAGO$"
+AdvancedInf=1.0

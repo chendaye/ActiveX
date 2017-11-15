@@ -1,0 +1,4 @@
+参考网址：
+基本步骤    http://www.cnblogs.com/yilin/p/csharp-activex.html
+
+数字签名  http://blog.csdn.net/mywaster/article/details/50606500
