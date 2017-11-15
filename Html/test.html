@@ -1,0 +1,32 @@
+﻿<html>
+<head>
+    <title>ActiveX COM 控件测试</title>
+</head>
+<body>
+<button onclick="ActiveX()">ActiveX COM 控件测试</button>
+<object id="Test" classid="clsid:D5CDCDF1-5699-42E6-B81D-8FBB95092B99" codebase="ActivexCab.CAB" style="display: none;">
+    <param name="Param" id="Param" class="Param" value="http://cn.fs.com:8006/YX_sJsBEkT12004/includes/modules/page/fedex_pdf/ShipLabe_788389599753_0.txt" />
+
+     <param name="Zmber" id="Zmber" class="Zmber" value="\\10.172.0.237\Zebra-FDX ZM400 200 dpi (EPL)" />
+      <param name="Txt" id="Txt" class="Txt" value="E:\2017.txt" />
+</object>
+</body>
+</html>
+<script src="jquery.js"></script>
+<script type="text/javascript" language="javascript">
+    function ActiveX() {
+        var activeX = document.getElementById("Test");
+
+         activeX.Param = $("#Param").val();
+         activeX.Zmber = $("#Zmber").val();
+         activeX.Txt = $("#Txt").val();
+      
+      	alert(activeX.Path());
+      	alert(activeX.ZmberName());
+        alert(activeX.txtName());
+        alert(activeX.Epl());
+
+        var a = activeX.WriteStream();
+        alert(a);
+    }
+</script>
