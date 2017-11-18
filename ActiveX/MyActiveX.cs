@@ -14,10 +14,25 @@ namespace MyActiveX
         private string printName;
         private string txtPath;
         private string name = @"\\10.172.0.237\Zebra-FDX ZM400 200 dpi (EPL)";
+        private string savePath = @"E:\Fedex_Waybill";
 
         public MyActiveX()
         {
-           // this.printName = "Zebra  LP2844";
+            try
+            {
+                //检查目录是否存在
+                if (!Directory.Exists(this.savePath))
+                {
+                    // 不存在创建目录
+                    Directory.CreateDirectory(this.savePath);
+                }
+
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
         }
 
         //文件路径
@@ -126,7 +141,7 @@ namespace MyActiveX
         {
             try
             {
-                string ImagesPath = this.Txt;
+                string ImagesPath = this.savePath + "\\" +this.Txt;
                 HttpWebRequest oHttp_Web_Req = (HttpWebRequest)WebRequest.Create(this.Param);
                 Stream oStream = oHttp_Web_Req.GetResponse().GetResponseStream();
                 using (StreamReader respStreamReader = new StreamReader(oStream, Encoding.UTF8))
