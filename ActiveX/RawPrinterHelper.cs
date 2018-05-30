@@ -6,7 +6,7 @@ namespace MyActiveX
 {
     public class RawPrinterHelper
     {
-        // Structure and API declarions:
+        // 结构和API声明
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public class DOCINFOA
         {
