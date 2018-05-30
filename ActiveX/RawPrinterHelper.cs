@@ -36,9 +36,8 @@ namespace MyActiveX
         public static extern bool WritePrinter(IntPtr hPrinter, IntPtr pBytes, Int32 dwCount, out Int32 dwWritten);
 
         // SendBytesToPrinter()
-        // When the function is given a printer name and an unmanaged array
-        // of bytes, the function sends those bytes to the print queue.
-        // Returns true on success, false on failure.
+        // 传入打印机名，和要打印的字节
+        // 打印成功返回true 打印失败返回false
         public static bool SendBytesToPrinter(string szPrinterName, IntPtr pBytes, Int32 dwCount)
         {
             Int32 dwError = 0, dwWritten = 0;
@@ -49,16 +48,16 @@ namespace MyActiveX
             di.pDocName = "My C#.NET RAW Document";
             di.pDataType = "RAW";
 
-            // Open the printer.
+            // 启用打印机.
             if (OpenPrinter(szPrinterName.Normalize(), out hPrinter, IntPtr.Zero))
             {
-                // Start a document.
+                // 打开文件.
                 if (StartDocPrinter(hPrinter, 1, di))
                 {
-                    // Start a page.
+                    // 打开页面.
                     if (StartPagePrinter(hPrinter))
                     {
-                        // Write your bytes.
+                        // 写内容.
                         bSuccess = WritePrinter(hPrinter, pBytes, dwCount, out dwWritten);
                         EndPagePrinter(hPrinter);
                     }
@@ -66,8 +65,7 @@ namespace MyActiveX
                 }
                 ClosePrinter(hPrinter);
             }
-            // If you did not succeed, GetLastError may give more information
-            // about why not.
+            // 不成功，获取最近的错误信息
             if (bSuccess == false)
             {
                 dwError = Marshal.GetLastWin32Error();
@@ -79,27 +77,27 @@ namespace MyActiveX
         /*发送文件到打印机*/
         public static bool SendFileToPrinter(string szPrinterName, string szFileName)
         {
-            // Open the file.
+            // 打开文件.
             FileStream fs = new FileStream(szFileName, FileMode.Open);
-            // Create a BinaryReader on the file.
+            // 读文件的对象.
             BinaryReader br = new BinaryReader(fs);
-            // Dim an array of bytes big enough to hold the file's contents.
+            // 创建一个数组，存放文件内容，数组空间足够大.
             Byte[] bytes = new Byte[fs.Length];
             bool bSuccess = false;
-            // Your unmanaged pointer.
+            // 当前空闲内存的起始指针.
             IntPtr pUnmanagedBytes = new IntPtr(0);
             int nLength;
 
             nLength = Convert.ToInt32(fs.Length);
-            // Read the contents of the file into the array.
+            // 把文件内容放入数组.
             bytes = br.ReadBytes(nLength);
-            // Allocate some unmanaged memory for those bytes.
+            // 给这些字节分配内存
             pUnmanagedBytes = Marshal.AllocCoTaskMem(nLength);
-            // Copy the managed byte array into the unmanaged array.
+            // 把数组的内容放入分配的内存中.
             Marshal.Copy(bytes, 0, pUnmanagedBytes, nLength);
-            // Send the unmanaged bytes to the printer.
+            // 把内存的内容发送给打印机.
             bSuccess = SendBytesToPrinter(szPrinterName, pUnmanagedBytes, nLength);
-            // Free the unmanaged memory that you allocated earlier.
+            // 释放之前分配的内存.
             Marshal.FreeCoTaskMem(pUnmanagedBytes);
             return bSuccess;
         }
@@ -109,13 +107,12 @@ namespace MyActiveX
         {
             IntPtr pBytes;
             Int32 dwCount;
-            // How many characters are in the string?
+            // 当前字符串的长度
             //dwCount = szString.Length;
             dwCount = (szString.Length + 1) * Marshal.SystemMaxDBCSCharSize;
-            // Assume that the printer is expecting ANSI text, and then convert
-            // the string to ANSI text.
+            // 假定当前打印机需要ANSI格式内容，把字符串转化为ANSI格式
             pBytes = Marshal.StringToCoTaskMemAnsi(szString);
-            // Send the converted ANSI string to the printer.
+            // 发送ANSI字符串到打印机
             SendBytesToPrinter(szPrinterName, pBytes, dwCount);
             Marshal.FreeCoTaskMem(pBytes);
             return true;
